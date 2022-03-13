@@ -1,6 +1,6 @@
 "use strict";
 
-class PiedPiper extends Living_creature{
+class PiedPiper extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
@@ -27,7 +27,7 @@ class PiedPiper extends Living_creature{
     chooseCell(characterId){
 
         this.updateCoordinates();
-        super.chooseCell(characterId);
+        return super.chooseCell(characterId);
     }
 
     move(){

@@ -1,6 +1,6 @@
 "use strict";
 
-class Hunter extends Living_creature{
+class Hunter extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
@@ -28,7 +28,7 @@ class Hunter extends Living_creature{
     chooseCell(characterId){
 
         this.updateCoordinates();
-        super.chooseCell(characterId);
+        return super.chooseCell(characterId);
     }
 
     kill(){

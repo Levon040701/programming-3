@@ -1,6 +1,6 @@
 "use strict";
 
-class Grass extends Living_creature{
+class Grass extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
@@ -11,7 +11,7 @@ class Grass extends Living_creature{
 
     chooseCell(characterId){
 
-        super.chooseCell(characterId);
+        return super.chooseCell(characterId);
     }
 
     spawn(){

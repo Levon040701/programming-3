@@ -1,6 +1,6 @@
 "use strict";
 
-class Predator extends Living_creature{
+class Predator extends LivingCreature{
 
     constructor(x, y, id, side, idMatrix, objectsMatrix){
 
@@ -29,7 +29,7 @@ class Predator extends Living_creature{
     chooseCell(characterId){
 
         this.updateCoordinates();
-        super.chooseCell(characterId);
+        return super.chooseCell(characterId);
     }
 
     eat(){

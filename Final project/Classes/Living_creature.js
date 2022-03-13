@@ -1,6 +1,6 @@
-"use strict";
+// "use strict";
 
-class Living_creature{
+class LivingCreature{
 
     constructor(x, y, id){
 
