@@ -4,29 +4,13 @@ class PiedPiper extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
-        super(x, y, id);
-        this.idMatrix = idMatrix;
-        this.objectsMatrix = objectsMatrix;
+        super(x, y, id, side, idMatrix, objectsMatrix);
         this.updateCoordinates();
-    }
-
-    updateCoordinates(){
-
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
 
     chooseCell(characterId){
 
-        this.updateCoordinates();
+        super.updateCoordinates();
         return super.chooseCell(characterId);
     }
 
@@ -49,7 +33,7 @@ class PiedPiper extends LivingCreature{
             this.y = newY;
         }
 
-        this.die();
+        this.fight();
     }
 
     kill(){
@@ -77,12 +61,12 @@ class PiedPiper extends LivingCreature{
         }
     }
 
-    die(){
+    fight(){
 
         const hunters = this.chooseCell(4);
         let huntersAdvantage = 0;
         for(let i = 0; i < hunters.length; i++){
-            huntersAdvantage += this.objectsMatrix[hunters[i][1]][hunters[i][0]].killedAnimals;
+            huntersAdvantage += this.objectsMatrix[hunters[i][1]][hunters[i][0]].energy;
         }
         if(this.energy / 5 < huntersAdvantage){
             this.idMatrix[this.y][this.x] = 0;

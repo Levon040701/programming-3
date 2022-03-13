@@ -4,9 +4,7 @@ class Grass extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
-        super(x, y, id);
-        this.idMatrix = idMatrix;
-        this.objectsMatrix = objectsMatrix;
+        super(x, y, id, side, idMatrix, objectsMatrix);
     }
 
     chooseCell(characterId){

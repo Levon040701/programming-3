@@ -4,30 +4,14 @@ class Hunter extends LivingCreature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
-        super(x, y, id);
-        this.killedAnimals = 0;
-        this.idMatrix = idMatrix;
-        this.objectsMatrix = objectsMatrix;
+        super(x, y, id, side, idMatrix, objectsMatrix);
+        this.energy = 8;
         this.updateCoordinates();
-    }
-
-    updateCoordinates(){
-
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
     }
 
     chooseCell(characterId){
 
-        this.updateCoordinates();
+        super.updateCoordinates();
         return super.chooseCell(characterId);
     }
 
@@ -44,7 +28,7 @@ class Hunter extends LivingCreature{
         }
         const newCell = random(animalsArround);
 
-        if(newCell && this.killedAnimals > -8){
+        if(newCell && this.energy > 0){
             const newX = newCell[0];
             const newY = newCell[1];
 
@@ -56,7 +40,7 @@ class Hunter extends LivingCreature{
 
             this.x = newX;
             this.y = newY;
-            this.killedAnimals++;
+            this.energy++;
         } else{
             this.move();
         }
@@ -67,7 +51,7 @@ class Hunter extends LivingCreature{
         const targetCells = this.chooseCell(0);
         const newCell = random(targetCells);
 
-        if(newCell && this.killedAnimals > -8){
+        if(newCell && this.energy > 0){
             const newX = newCell[0];
             const newY = newCell[1];
 
@@ -79,18 +63,10 @@ class Hunter extends LivingCreature{
 
             this.x = newX;
             this.y = newY;
+            this.energy--;
         }
-        this.killedAnimals--;
 
-        this.die();
-    }
-
-    die(){
-
-        if(this.killedAnimals <= -8){
-            this.idMatrix[this.y][this.x] = 0;
-            this.objectsMatrix[this.y][this.x] = null;
-        }
+        super.die();
     }
 
     update(){
