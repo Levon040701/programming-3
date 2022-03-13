@@ -4,10 +4,7 @@ class PiedPiper extends Living_creature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
-        this.x = x;
-        this.y = y;
-        this.id = id;
-        this.energy = 0;
+        super(x, y, id);
         this.idMatrix = idMatrix;
         this.objectsMatrix = objectsMatrix;
         this.updateCoordinates();

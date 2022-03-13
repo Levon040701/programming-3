@@ -4,9 +4,7 @@ class Predator extends Living_creature{
 
     constructor(x, y, id, side, idMatrix, objectsMatrix){
 
-        this.x = x;
-        this.y = y;
-        this.id = id;
+        super(x, y, id);
         this.side = side;
         this.energy = 8;
         this.idMatrix = idMatrix;

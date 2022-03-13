@@ -4,9 +4,7 @@ class Hunter extends Living_creature{
 
     constructor(x, y, id, idMatrix, objectsMatrix){
 
-        this.x = x;
-        this.y = y;
-        this.id = id;
+        super(x, y, id);
         this.killedAnimals = 0;
         this.idMatrix = idMatrix;
         this.objectsMatrix = objectsMatrix;
