@@ -1,12 +1,10 @@
 "use strict";
 
-class Herbivore{
+class Herbivore extends Living_creature{
 
     constructor(x, y, id, side, idMatrix, objectsMatrix){
 
-        this.x = x;
-        this.y = y;
-        this.id = id;
+        super(x, y, id);
         this.side = side;
         this.energy = 8;
         this.idMatrix = idMatrix;
@@ -31,19 +29,7 @@ class Herbivore{
     chooseCell(characterId){
 
         this.updateCoordinates();
-        const found = [];
-
-        for(let i = 0; i < this.directions.length; i++){
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if(x >= 0 && x < this.idMatrix[0].length && y >= 0 && y < this.idMatrix.length){
-                if(this.idMatrix[y][x] == characterId){
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-
-        return found;
+        super(this.chooseCell)
     }
 
     eat(){
@@ -131,12 +117,12 @@ class Herbivore{
         if(PiedPiperX >= 0 && PiedPiperY >= 0 && this.energy > 0){
             const distances = [];
             for(let i = 0; i < targetCells.length; i++){
-                distances.push(this.computeDistance(targetCells[i][0], targetCells[i][1], witchX, witchY));
+                distances.push(this.computeDistance(targetCells[i][0], targetCells[i][1], PiedPiperX, PiedPiperY));
             }
 
             let minimalDistanceIndex = 0;
             for(let i = 0; i < distances.length; i++){
-                if(distances[i] < distance[minimalDistanceIndex]){
+                if(distances[i] < distances[minimalDistanceIndex]){
                     minimalDistanceIndex = i;
                 }
             }
