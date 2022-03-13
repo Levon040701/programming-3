@@ -29,7 +29,7 @@ class Herbivore extends Living_creature{
     chooseCell(characterId){
 
         this.updateCoordinates();
-        super(this.chooseCell)
+        super.chooseCell(characterId);
     }
 
     eat(){
