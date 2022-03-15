@@ -6,19 +6,12 @@ class Hunter extends LivingCreature{
 
         super(x, y, id, side, idMatrix, objectsMatrix);
         this.energy = 8;
-        this.updateCoordinates();
-    }
-
-    chooseCell(characterId){
-
-        super.updateCoordinates();
-        return super.chooseCell(characterId);
     }
 
     kill(){
 
-        const herbivoresArround = this.chooseCell(2);
-        const predatorsArround = this.chooseCell(3);
+        const herbivoresArround = super.chooseCell(2);
+        const predatorsArround = super.chooseCell(3);
         const animalsArround = [];
         for(let i = 0; i < predatorsArround.length; i++){
             animalsArround.push(predatorsArround[i]);
@@ -42,31 +35,8 @@ class Hunter extends LivingCreature{
             this.y = newY;
             this.energy++;
         } else{
-            this.move();
+            super.move();
         }
-    }
-
-    move(){
-
-        const targetCells = this.chooseCell(0);
-        const newCell = random(targetCells);
-
-        if(newCell && this.energy > 0){
-            const newX = newCell[0];
-            const newY = newCell[1];
-
-            this.idMatrix[newY][newX] = this.id;
-            this.idMatrix[this.y][this.x] = 0;
-
-            this.objectsMatrix[newY][newX] = this;
-            this.objectsMatrix[this.y][this.x] = null;
-
-            this.x = newX;
-            this.y = newY;
-            this.energy--;
-        }
-
-        super.die();
     }
 
     update(){

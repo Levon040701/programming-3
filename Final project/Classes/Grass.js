@@ -7,15 +7,10 @@ class Grass extends LivingCreature{
         super(x, y, id, side, idMatrix, objectsMatrix);
     }
 
-    chooseCell(characterId){
-
-        return super.chooseCell(characterId);
-    }
-
     spawn(){
 
         this.energy++;
-        const targetCells = this.chooseCell(0);
+        const targetCells = super.chooseCell(0);
         const newCell = random(targetCells);
         if(this.energy >= 6 && newCell){
             const newX = newCell[0];

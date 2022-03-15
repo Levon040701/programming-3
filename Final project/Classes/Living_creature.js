@@ -37,6 +37,7 @@ class LivingCreature{
 
     chooseCell(characterId){
 
+        this.updateCoordinates();
         const found = [];
 
         for(let i = 0; i < this.directions.length; i++){
@@ -96,6 +97,29 @@ class LivingCreature{
             this.x = newX;
             this.y = newY;
         }
+    }
+
+    move(){
+
+        const targetCells = this.chooseCell(0);
+        const newCell = random(targetCells);
+
+        if(newCell && this.energy > 0){
+            const newX = newCell[0];
+            const newY = newCell[1];
+
+            this.idMatrix[newY][newX] = this.id;
+            this.idMatrix[this.y][this.x] = 0;
+
+            this.objectsMatrix[newY][newX] = this;
+            this.objectsMatrix[this.y][this.x] = null;
+
+            this.x = newX;
+            this.y = newY;
+            this.energy--;
+        }
+
+        this.die();
     }
 
     die(){

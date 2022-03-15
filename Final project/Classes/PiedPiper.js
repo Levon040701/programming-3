@@ -5,18 +5,11 @@ class PiedPiper extends LivingCreature{
     constructor(x, y, id, idMatrix, objectsMatrix){
 
         super(x, y, id, side, idMatrix, objectsMatrix);
-        this.updateCoordinates();
-    }
-
-    chooseCell(characterId){
-
-        super.updateCoordinates();
-        return super.chooseCell(characterId);
     }
 
     move(){
 
-        const targetCells = this.chooseCell(0);
+        const targetCells = super.chooseCell(0);
         const newCell = random(targetCells);
 
         if(newCell){
@@ -38,9 +31,9 @@ class PiedPiper extends LivingCreature{
 
     kill(){
 
-        const killGrass = this.chooseCell(1);
-        const killHerbivore = this.chooseCell(2);
-        const killPredator = this.chooseCell(3);
+        const killGrass = super.chooseCell(1);
+        const killHerbivore = super.chooseCell(2);
+        const killPredator = super.chooseCell(3);
         const kill = [];
         for(let i = 0; i < killGrass.length; i++){
             kill.push(killGrass[i]);
@@ -63,7 +56,7 @@ class PiedPiper extends LivingCreature{
 
     fight(){
 
-        const hunters = this.chooseCell(4);
+        const hunters = super.chooseCell(4);
         let huntersAdvantage = 0;
         for(let i = 0; i < hunters.length; i++){
             huntersAdvantage += this.objectsMatrix[hunters[i][1]][hunters[i][0]].energy;
@@ -83,7 +76,7 @@ class PiedPiper extends LivingCreature{
 
     update(){
 
-        this.move();
+        super.move();
         this.kill();
     }
 }
