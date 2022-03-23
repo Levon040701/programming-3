@@ -75,20 +75,7 @@ function findEmptyCells(matrix){
     return emptyCells[randomCoordinates];
 }
 
-function findObjects(characterId){
 
-    let objectsFound = 0;
-
-    for(let y = 0; y < matrix.length; y++){
-        for(let x = 0; x < matrix[y].length; x++){
-            if(matrix[y][x] == characterId){
-                objectsFound++;
-            }
-        }
-    }
-
-    return objectsFound;
-}
 
 function createMatrix(horizontalLength, verticalLength){
 
@@ -167,6 +154,7 @@ function drawMatrix(matrix){
         }
     }
 }
+
 
 function updateObjectsMatrix(objectsMatrix){
 
