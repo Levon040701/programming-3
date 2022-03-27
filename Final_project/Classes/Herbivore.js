@@ -44,7 +44,7 @@ module.exports = class Herbivore extends LivingCreature{
             const newX = newCell[0];
             const newY = newCell[1];
             this.idMatrix[newY][newX] = this.id;
-            const newHerbivore = new Herbivore(newX, newY, this.id, side, 0, 0, this.idMatrix, this.objectsMatrix);
+            const newHerbivore = new Herbivore(newX, newY, this.id, this.side, this.idMatrix, this.objectsMatrix);
             this.objectsMatrix[newY][newX] = newHerbivore;
         }
         this.energy = 8;

@@ -44,7 +44,7 @@ module.exports = class Predator extends LivingCreature{
             const newX = newCell[0];
             const newY = newCell[1];
             this.idMatrix[newY][newX] = this.id;
-            const newPredator = new Predator(newX, newY, this.id, side, 0, 0, this.idMatrix, this.objectsMatrix);
+            const newPredator = new Predator(newX, newY, this.id, this.side, this.idMatrix, this.objectsMatrix);
             this.objectsMatrix[newY][newX] = newPredator;
         }
         this.energy = 8;

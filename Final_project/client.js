@@ -1,22 +1,22 @@
 var socket = io();
 
-const m = +prompt("Heigth:");
-const n = +prompt("Width:");
-const speed = +prompt("Speed:")
+// const m = +prompt("Heigth:");
+// const n = +prompt("Width:");
+const m = 25
+const n = 25
 
 const side = 25;
-const X = side * n;
-const Y = side * m;
+const X = side * m
+const Y = side * n
 
 function setup(){
 
-    createCanvas(X, Y);
+    createCanvas(20, 20);
     background("#fff");
-    frameRate(speed);
 }
 
 function drawMatrix(matrix){
-
+    
     for(let y = 0; y < matrix.length; y++){
         for(let x = 0; x < matrix[y].length; x++){
             if(matrix[y][x] == 1){
@@ -39,6 +39,6 @@ function drawMatrix(matrix){
 
 setInterval(
     function () {
-        socket.on('send matrix', drawMatrix)
-    }, 1000
+    socket.on('send matrix', drawMatrix());
+    },1000
 )
