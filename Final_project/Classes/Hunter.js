@@ -4,7 +4,7 @@ let LivingCreature = require('./Living_creature')
 
 module.exports = class Hunter extends LivingCreature{
 
-    constructor(x, y, id, idMatrix, objectsMatrix){
+    constructor(x, y, id, side, idMatrix, objectsMatrix){
 
         super(x, y, id, side, idMatrix, objectsMatrix);
         this.energy = 8;
