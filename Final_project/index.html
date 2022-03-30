@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GoL</title>
+	<title>GoL Project</title>
 	<meta charset="utf8">
+	<style>
+		.button{
+			display: flex;
+			justify-content: center;
+			margin: 5px;
+		}
+	</style>
 </head>
 <body>
 	<h1>Game of life</h1>
 	<div>
-		<script src="socket.io/socket.io.js"></script>
+		<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 		<script src="client.js"></script>
 	</div>
 	<br>
 	<div>
-		<h3>Summer</h3>
-		<h3>Spring</h3><h3>Fall</h3>
-		<h3>Winter</h3>
+		<div class="button"><button onclick="summer()">Summer</button></div>
+		<div class="button">
+			<button style="margin-right: 5px" onclick="spring()">Spring</button>
+			<button onclick="fall()">Fall</button>
+		</div>
+		<div class="button"><button onclick="winter()">Winter</button></div>
 	</div>
 </body>
 </html>

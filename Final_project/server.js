@@ -13,108 +13,95 @@ server.listen(3000, () => {
     console.log('connected');
 });
 
-var matrix = [[2, 2, 1, 2, 1, 0, 1],
-[1, 2, 1, 0, 1, 1, 1],
-[1, 0, 2, 0, 1, 0, 1],
-[0, 1, 0, 1, 0, 0, 1],
-[1, 2, 1, 0, 1, 1, 1],
-[1, 0, 2, 0, 1, 0, 1],
-[0, 1, 0, 1, 0, 1, 1],
-[1, 2, 1, 0, 1, 1, 1],
-[1, 0, 2, 0, 1, 0, 1],
-[0, 1, 0, 1, 0, 0, 1],
-[1, 2, 1, 0, 1, 1, 1],
-[1, 0, 2, 0, 1, 0, 1],
-[0, 1, 0, 1, 0, 0, 1]];
+const side = 25;
 
+function createMatrix(horizontalLength, verticalLength){
 
-io.sockets.emit('send matrix', matrix);
-// const side = 25;
-
-
-/* function createMatrix(horizontalLength, verticalLength){
+    const newMatrix = [];
     for(let y = 0; y < verticalLength; y++){
-        matrix[y] = [];
-        console.log(matrix);
-        
+        newMatrix[y] = [];
         for(let x = 0; x < horizontalLength; x++){
             const randomSectionCursor = Math.random() * 100;
             if(randomSectionCursor <= 35){
-                matrix[y][x] = 1;
+                newMatrix[y][x] = 1;
             } else if(randomSectionCursor <= 60){
-                matrix[y][x] = 2;
+                newMatrix[y][x] = 2;
             } else if(randomSectionCursor <= 75){
-                matrix[y][x] = 3;
+                newMatrix[y][x] = 3;
             } else if(randomSectionCursor <= 77){
-                matrix[y][x] = 4;
+                newMatrix[y][x] = 4;
             } else if(randomSectionCursor <= 78){
-                matrix[y][x] = 5;
+                newMatrix[y][x] = 5;
             } else{
-                matrix[y][x] = 0;
+                newMatrix[y][x] = 0;
             }
         }
     }
-    return matrix
+    
+    return newMatrix;
 }
- */
 
-// io.sockets.emit('send matrix', matrix);
+const matrix = createMatrix(25, 40);
+io.sockets.emit('send matrix', matrix);
+
+const Grass = require("./Classes/Grass");
+const Herbivore = require("./Classes/Herbivore");
+const Predator = require("./Classes/Predator");
+const Hunter = require("./Classes/Hunter");
+const PiedPiper = require("./Classes/PiedPiper");
 
 
-// Grass = require("./Classes/Grass");
-// Herbivore = require("./Classes/Herbivore");
-// Predator = require("./Classes/Predator");
-// Hunter = require("./Classes/Hunter");
-// PiedPiper = require("./Classes/PiedPiper");
+function createObjectsMatrix(matrix){
 
-
-// function createObjectsMatrix(){
-//     for(let y = 0; y < matrix.length; y++){
-//         for(let x = 0; x < matrix[y].length; x++){
-//             if(matrix[y][x] == 1){
-//                 const newGrass = new Grass(x, y, 1, side, matrix, matrix);
-//                 matrix[y][x] = newGrass;
-//             } else if(matrix[y][x] == 2){
-//                 const newHerbivore = new Herbivore(x, y, 2, side, matrix, matrix);
-//                 matrix[y][x] = newHerbivore;
-//             } else if(matrix[y][x] == 3){
-//                 const newPredator = new Predator(x, y, 3, side, matrix, matrix);
-//                 matrix[y][x] = newPredator;
-//             } else if(matrix[y][x] == 4){
-//                 const newHunter = new Hunter(x, y, 4, side, matrix, matrix);
-//                 matrix[y][x] = newHunter;
-//             } else if(matrix[y][x] == 5){
-//                 const newPiedPiper = new PiedPiper(x, y, 5, side, matrix, matrix);
-//                 matrix[y][x] = newPiedPiper;
-//             } else{
-//                 matrix[y][x] = null;
-//             }
-//         }
-//     }
-//     console.log(matrix);
+    const newObjectMatrix = [];
+    for(let y = 0; y < matrix.length; y++){
+        newObjectMatrix[y] = [];
+        for(let x = 0; x < matrix[y].length; x++){
+            if(matrix[y][x] == 1){
+                const newGrass = new Grass(x, y, 1, side, matrix, newObjectMatrix);
+                newObjectMatrix[y][x] = newGrass;
+            } else if(matrix[y][x] == 2){
+                const newHerbivore = new Herbivore(x, y, 2, side, matrix, newObjectMatrix);
+                newObjectMatrix[y][x] = newHerbivore;
+            } else if(matrix[y][x] == 3){
+                const newPredator = new Predator(x, y, 3, side, matrix, newObjectMatrix);
+                newObjectMatrix[y][x] = newPredator;
+            } else if(matrix[y][x] == 4){
+                const newHunter = new Hunter(x, y, 4, side, matrix, newObjectMatrix);
+                newObjectMatrix[y][x] = newHunter;
+            } else if(matrix[y][x] == 5){
+                const newPiedPiper = new PiedPiper(x, y, 5, side, matrix, newObjectMatrix);
+                newObjectMatrix[y][x] = newPiedPiper;
+            } else{
+                newObjectMatrix[y][x] = null;
+            }
+        }
+    }
     
-//     io.sockets.emit('send matrix', matrix);
-// }
+    return newObjectMatrix;
+}
+
+const objectsMatrix = createObjectsMatrix(matrix);
 
 
-// function game(){
-//     for(let y = 0; y < matrix.length; y++){
-//         for(let x = 0; x < matrix[y].length; x++){
-//             const object = matrix[y][x];
-//             if(object){
-//                 object.update();
-//             }
-//         }
-//     }
+function game(){
+
+    for(let y = 0; y < objectsMatrix.length; y++){
+        for(let x = 0; x < objectsMatrix[y].length; x++){
+            const object = objectsMatrix[y][x];
+            if(object){
+                object.update();
+            }
+        }
+    }
     
-//     io.sockets.emit("send matrix", matrix);
-// }
+    io.sockets.emit("send matrix", matrix);
+}
 
-// setInterval(game, 1000)
+setInterval(game, 1000);
 
 
 io.on('connection', function (socket){
-    console.log('okok');
     
-    // createObjectsMatrix();
+    createObjectsMatrix(matrix);
 })

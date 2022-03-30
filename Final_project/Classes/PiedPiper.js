@@ -76,9 +76,34 @@ module.exports = class PiedPiper extends LivingCreature{
         }
     }
 
+    move(){
+
+        const targetCells = super.chooseCell(0);
+        const newCell = Math.random(targetCells);
+
+        if(newCell && this.energy > 0){
+            const newX = newCell[0];
+            const newY = newCell[1];
+
+            if (newCell[0]){
+                this.idMatrix[newY][newX] = this.id;
+                this.idMatrix[this.y][this.x] = 0;
+
+                this.objectsMatrix[newY][newX] = this;
+                this.objectsMatrix[this.y][this.x] = null;
+
+                this.x = newX;
+                this.y = newY;
+                this.energy--;
+            }
+        }
+
+        super.die();
+    }
+
     update(){
 
-        super.move();
+        this.move();
         this.kill();
     }
 }
